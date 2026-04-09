@@ -94,8 +94,9 @@ async def whoop_get_healthspan(date: str = None) -> str:
 
 # Run the server - matching Poke template exactly
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))
-    host = "0.0.0.0"
+    port_value = os.environ["PORT"] if "PORT" in os.environ else "8000"
+    port = int(port_value) if port_value.isdigit() else 8000
+    host = os.environ["HOST"] if "HOST" in os.environ else "0.0.0.0"
     
     print(f"🚀 Starting WHOOP MCP Server on {host}:{port}")
     
